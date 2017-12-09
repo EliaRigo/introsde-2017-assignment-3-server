@@ -17,7 +17,6 @@ import introsde.assignment3.soap.dao.ActivityPreferenceDao;
 @Entity
 @Table(name = "\"Person\"")
 @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p")
-@XmlType(propOrder = { "idPerson", "firstname", "lastname", "birthdate", "activities" })
 @XmlRootElement
 public class Person implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -89,8 +88,6 @@ public class Person implements Serializable {
 		this.lastname = lastname;
 	}
 
-	@XmlElementWrapper(name = "activitiesPreference")
-	@XmlElement(name = "activity")
 	public List<Activity> getActivities() {
 		return activities;
 	}

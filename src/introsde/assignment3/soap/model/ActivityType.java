@@ -42,7 +42,6 @@ public class ActivityType implements Serializable {
 	@OneToMany(mappedBy = "activityType", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Activity> activity;
 
-	@XmlTransient
 	public int getIdActivityType() {
 		return idActivityType;
 	}
@@ -59,7 +58,6 @@ public class ActivityType implements Serializable {
 		this.activity_type = activity_type;
 	}
 
-	@XmlTransient
 	public List<Activity> getActivity() {
 		return activity;
 	}

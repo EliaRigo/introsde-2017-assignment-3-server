@@ -79,10 +79,24 @@ public class PeopleImpl implements People {
     
     // Method #10
     @Override
-    public Activity updatePersonPreferences(Long id,Activity activity){
+    public Activity updatePersonPreferences(Long id, Activity activity){
     	activity.setIdPerson(id.intValue());
     	activity.setPerson(Person.getPersonById(id.intValue()));
     	return Activity.updateActivity(activity);
     }
     
+    // Method #11
+    @Override
+    public Activity evaluatePersonPreferences(Long id, Activity activity, int value) {
+    	activity.setIdPerson(id.intValue());
+    	activity.setPerson(Person.getPersonById(id.intValue()));
+    	activity.setRate(value);
+    	return Activity.updateActivity(activity);
+    }
+    
+    // Method #12
+    @Override
+    public List<Activity> getBestPersonPreference(Long id){
+    	return Activity.getBestActivitiesByIdPerson(id.intValue());
+    }
 }

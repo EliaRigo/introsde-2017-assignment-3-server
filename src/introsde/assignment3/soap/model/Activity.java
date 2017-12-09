@@ -1,6 +1,7 @@
 package introsde.assignment3.soap.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -32,7 +33,10 @@ import introsde.assignment3.soap.dao.ActivityPreferenceDao;
 				+ "at.activity_type = :param_activity_type"),
 		@NamedQuery(name = "Activity.findActivityByIdPersonAndIdActivity", query = "SELECT a FROM Activity a "
 				+ "JOIN ActivityType at ON a.idActivityType = at.idActivityType "
-				+ "WHERE a.idPerson = :param_idPerson AND " + "a.idActivity = :param_idActivity")})
+				+ "WHERE a.idPerson = :param_idPerson AND " + "a.idActivity = :param_idActivity"),
+		@NamedQuery(name = "Activity.findActivitiesByIdPerson", query = "SELECT a FROM Activity a "
+				+ "JOIN ActivityType at ON a.idActivityType = at.idActivityType "
+				+ "WHERE a.idPerson = :param_idPerson"),})
 @XmlRootElement
 public class Activity implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -62,6 +66,9 @@ public class Activity implements Serializable {
 
 	@Column(name = "\"startdate\"")
 	private String startdate;
+	
+	@Column(name= "\"rate\"")
+	private int rate;
 
 	@ManyToOne()
 	@PrimaryKeyJoinColumn(name = "\"idActivityType\"", referencedColumnName = "\"idActivityType\"")
@@ -132,6 +139,14 @@ public class Activity implements Serializable {
 	public void setStartdate(String startdate) {
 		this.startdate = startdate;
 	}
+	
+	public int getRate() {
+		return rate;
+	}
+
+	public void setRate(int rate) {
+		this.rate = rate;
+	}
 
 	// @XmlElement(name = "activityType")
 	public ActivityType getActivityType() {
@@ -142,7 +157,6 @@ public class Activity implements Serializable {
 		this.activityType = activityType;
 	}
 
-	@XmlTransient
 	public Person getPerson() {
 		return person;
 	}
@@ -181,6 +195,33 @@ public class Activity implements Serializable {
 				.getResultList();
 		ActivityPreferenceDao.instance.closeConnections(em);
 		return list;
+	}
+	
+	/**
+	 * Get Best Activities by idPerson
+	 * @param idPerson Integer IdPerson
+	 * @return
+	 */
+	public static List<Activity> getBestActivitiesByIdPerson(int idPerson) {
+		EntityManager em = ActivityPreferenceDao.instance.createEntityManager();
+		List<Activity> list = em.createNamedQuery("Activity.findActivitiesByIdPerson", Activity.class)
+				.setParameter("param_idPerson", idPerson)
+				.getResultList();
+		ActivityPreferenceDao.instance.closeConnections(em);
+		List<Activity> prefList = new ArrayList<Activity>();
+		if (list.size() > 0) {
+			prefList.add(list.get(0));
+			for (int i = 1; i < list.size(); i++) {
+				if (list.get(i).getRate() == prefList.get(0).getRate()) {
+					prefList.add(list.get(i));
+				}
+				else if (list.get(i).getRate() > prefList.get(0).getRate()) {
+					prefList.clear();
+					prefList.add(list.get(i));
+				}
+			}
+		}
+		return prefList;
 	}
 
 	/**

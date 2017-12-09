@@ -69,4 +69,16 @@ public interface People {
     @WebResult(name="activity") 
     public Activity updatePersonPreferences(@WebParam(name="personId") Long id, 
     										@WebParam(name="activity") Activity activity);
+    
+    //Method #11
+    @WebMethod(operationName="evaluatePersonPreferences")
+    @WebResult(name="activity") 
+    public Activity evaluatePersonPreferences(@WebParam(name="personId") Long id, 
+    										  @WebParam(name="activity") Activity activity,
+    										  @WebParam(name="value") int value);
+    
+    //Method #12
+    @WebMethod(operationName="getBestPersonPreference")
+    @WebResult(name="activity") 
+    public List<Activity> getBestPersonPreference(@WebParam(name="personId") Long id);
 }
