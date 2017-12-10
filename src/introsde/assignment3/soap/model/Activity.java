@@ -37,7 +37,7 @@ import introsde.assignment3.soap.dao.ActivityPreferenceDao;
 		@NamedQuery(name = "Activity.findActivitiesByIdPerson", query = "SELECT a FROM Activity a "
 				+ "JOIN ActivityType at ON a.idActivityType = at.idActivityType "
 				+ "WHERE a.idPerson = :param_idPerson"),})
-@XmlRootElement
+//@XmlRootElement
 public class Activity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -70,7 +70,7 @@ public class Activity implements Serializable {
 	@Column(name= "\"rate\"")
 	private int rate;
 
-	@ManyToOne()
+	//@ManyToOne()
 	@PrimaryKeyJoinColumn(name = "\"idActivityType\"", referencedColumnName = "\"idActivityType\"")
 	private ActivityType activityType;
 
@@ -148,7 +148,6 @@ public class Activity implements Serializable {
 		this.rate = rate;
 	}
 
-	// @XmlElement(name = "activityType")
 	public ActivityType getActivityType() {
 		return activityType;
 	}
@@ -157,6 +156,7 @@ public class Activity implements Serializable {
 		this.activityType = activityType;
 	}
 
+	@XmlTransient
 	public Person getPerson() {
 		return person;
 	}
@@ -278,7 +278,7 @@ public class Activity implements Serializable {
 	 *            ActivityType activityType
 	 * @return Single Activity
 	 */
-	public static Activity postActivity(Activity activity, int idPerson, ActivityType activityType) {
+	/*public static Activity postActivity(Activity activity, int idPerson, ActivityType activityType) {
 		activity.setIdPerson(idPerson);
 		activity.setPerson(Person.getPersonById(idPerson));
 		activity.setIdActivityType(activityType.getIdActivityType());
@@ -291,7 +291,7 @@ public class Activity implements Serializable {
 		tx.commit();
 		ActivityPreferenceDao.instance.closeConnections(em);
 		return activity;
-	}
+	}*/
 
 	/**
 	 * Update Activity

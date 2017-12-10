@@ -120,12 +120,12 @@ public class Person implements Serializable {
 		ActivityPreferenceDao.instance.closeConnections(em);
 		return p;
 	}
-	
 	/**
 	 * Insert new Person
 	 * @param p New Person
 	 * @return Single Person just inserted
 	 */
+	/*
 	public static Person newPerson(Person p) {
 		EntityManager em = ActivityPreferenceDao.instance.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
@@ -139,7 +139,7 @@ public class Person implements Serializable {
 			Activity.updateActivity(a);
 		}
 		return p;
-	}
+	}*/
 
 	/**
 	 * Update Person

@@ -21,7 +21,7 @@ public interface People {
     @WebMethod(operationName="readPersonList")
     @WebResult(name="people") 
     public List<Person> readPersonList();
-    
+    /*
     //Method #2
     @WebMethod(operationName="readPerson")
     @WebResult(name="person") 
@@ -81,4 +81,5 @@ public interface People {
     @WebMethod(operationName="getBestPersonPreference")
     @WebResult(name="activity") 
     public List<Activity> getBestPersonPreference(@WebParam(name="personId") Long id);
+    */
 }

@@ -24,7 +24,7 @@ import introsde.assignment3.soap.dao.ActivityPreferenceDao;
 @Table(name = "\"ActivityType\"")
 @NamedQueries({ @NamedQuery(name = "ActivityType.findAll", query = "SELECT a FROM ActivityType a"),
 		@NamedQuery(name = "ActivityType.findActivityTypeByActivityTypeName", query = "SELECT a FROM ActivityType a WHERE a.activity_type = :param_activity_type") })
-@XmlRootElement
+//@XmlRootElement
 public class ActivityType implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -58,6 +58,7 @@ public class ActivityType implements Serializable {
 		this.activity_type = activity_type;
 	}
 
+	@XmlTransient
 	public List<Activity> getActivity() {
 		return activity;
 	}

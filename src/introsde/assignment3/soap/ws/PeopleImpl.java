@@ -16,9 +16,11 @@ public class PeopleImpl implements People {
 	// Method #1
     @Override
     public List<Person> readPersonList() {
+    	System.out.println("arrivo qui");
+    	System.out.println(Person.getAll().toString());
         return Person.getAll();
     }
-    
+    /*
     // Method #2
     @Override
     public Person readPerson(Long id) {
@@ -98,5 +100,5 @@ public class PeopleImpl implements People {
     @Override
     public List<Activity> getBestPersonPreference(Long id){
     	return Activity.getBestActivitiesByIdPerson(id.intValue());
-    }
+    }*/
 }
