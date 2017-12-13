@@ -5,6 +5,7 @@ import java.util.List;
 import javax.jws.WebService;
 
 import introsde.assignment3.soap.model.Activity;
+import introsde.assignment3.soap.model.ActivityType;
 import introsde.assignment3.soap.model.Person;
 
 //Service Implementation
@@ -16,17 +17,14 @@ public class PeopleImpl implements People {
 	// Method #1
     @Override
     public List<Person> readPersonList() {
-    	System.out.println("arrivo qui");
     	System.out.println(Person.getAll().toString());
         return Person.getAll();
     }
-    /*
+    
     // Method #2
     @Override
     public Person readPerson(Long id) {
-        System.out.println("---> Reading Person by id = "+id);
-        Person p = Person.getPersonById(id.intValue());
-        return p;
+        return Person.getPersonById(id.intValue());
     }
 
     // Method #3
@@ -38,8 +36,7 @@ public class PeopleImpl implements People {
     // Method #4
     @Override
     public Person createPerson(Person person) {
-        Person.newPerson(person);
-        return person;
+        return Person.newPerson(person);
     }
 
     // Method #5
@@ -53,13 +50,13 @@ public class PeopleImpl implements People {
             return -1;
         }
     }
-    
+
     // Method #6
     @Override
     public List<Activity> readPersonPreferences(Long id, String activity_type) {
     	return Activity.getActivityByIdPersonAndActivityType(id.intValue(), activity_type);
     }
-    
+
     // Method #7
     @Override
     public List<Activity> readPreferences(){
@@ -76,7 +73,7 @@ public class PeopleImpl implements People {
     // Method #9
     @Override
     public Activity savePersonPreferences(Long id, Activity activity) {
-    	return Activity.postActivity(activity, id.intValue(), activity.getActivityType());
+    	return Activity.postActivity(activity, id.intValue());
     }
     
     // Method #10
@@ -84,6 +81,7 @@ public class PeopleImpl implements People {
     public Activity updatePersonPreferences(Long id, Activity activity){
     	activity.setIdPerson(id.intValue());
     	activity.setPerson(Person.getPersonById(id.intValue()));
+		activity.setActivityType(ActivityType.getActivityTypeByActivityTypeId(activity.getIdActivityType()));
     	return Activity.updateActivity(activity);
     }
     
@@ -92,6 +90,7 @@ public class PeopleImpl implements People {
     public Activity evaluatePersonPreferences(Long id, Activity activity, int value) {
     	activity.setIdPerson(id.intValue());
     	activity.setPerson(Person.getPersonById(id.intValue()));
+		activity.setActivityType(ActivityType.getActivityTypeByActivityTypeId(activity.getIdActivityType()));
     	activity.setRate(value);
     	return Activity.updateActivity(activity);
     }
@@ -100,5 +99,5 @@ public class PeopleImpl implements People {
     @Override
     public List<Activity> getBestPersonPreference(Long id){
     	return Activity.getBestActivitiesByIdPerson(id.intValue());
-    }*/
+    }
 }

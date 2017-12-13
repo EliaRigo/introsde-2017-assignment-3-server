@@ -23,7 +23,8 @@ import introsde.assignment3.soap.dao.ActivityPreferenceDao;
 @Entity
 @Table(name = "\"ActivityType\"")
 @NamedQueries({ @NamedQuery(name = "ActivityType.findAll", query = "SELECT a FROM ActivityType a"),
-		@NamedQuery(name = "ActivityType.findActivityTypeByActivityTypeName", query = "SELECT a FROM ActivityType a WHERE a.activity_type = :param_activity_type") })
+		@NamedQuery(name = "ActivityType.findActivityTypeByActivityTypeName", query = "SELECT a FROM ActivityType a WHERE a.activity_type = :param_activity_type"),
+		@NamedQuery(name = "ActivityType.findActivityTypeByActivityTypeId", query = "SELECT a FROM ActivityType a WHERE a.idActivityType = :param_activity_type_id") })
 //@XmlRootElement
 public class ActivityType implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -89,6 +90,20 @@ public class ActivityType implements Serializable {
 		EntityManager em = ActivityPreferenceDao.instance.createEntityManager();
 		ActivityType at = em.createNamedQuery("ActivityType.findActivityTypeByActivityTypeName", ActivityType.class)
 				.setParameter("param_activity_type", activityType).getSingleResult();
+		ActivityPreferenceDao.instance.closeConnections(em);
+		return at;
+
+	}
+	
+	/**
+	 * Get ActivityType by ActivityTypeId
+	 * @param activityType activity_type
+	 * @return Single ActivityType
+	 */
+	public static ActivityType getActivityTypeByActivityTypeId(int activityTypeId) {
+		EntityManager em = ActivityPreferenceDao.instance.createEntityManager();
+		ActivityType at = em.createNamedQuery("ActivityType.findActivityTypeByActivityTypeId", ActivityType.class)
+				.setParameter("param_activity_type_id", activityTypeId).getSingleResult();
 		ActivityPreferenceDao.instance.closeConnections(em);
 		return at;
 

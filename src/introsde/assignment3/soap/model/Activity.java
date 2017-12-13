@@ -260,7 +260,7 @@ public class Activity implements Serializable {
 	public static Activity getActivityByIdPersonAndIdActivity(int idPerson, int idActivity) {
 		EntityManager em = ActivityPreferenceDao.instance.createEntityManager();
 		Activity activity = em
-				.createNamedQuery("Activity.findActivityByIdPersonAndIdActivityActivityType", Activity.class)
+				.createNamedQuery("Activity.findActivityByIdPersonAndIdActivity", Activity.class)
 				.setParameter("param_idPerson", idPerson)
 				.setParameter("param_idActivity", idActivity).getSingleResult();
 		ActivityPreferenceDao.instance.closeConnections(em);
@@ -278,11 +278,10 @@ public class Activity implements Serializable {
 	 *            ActivityType activityType
 	 * @return Single Activity
 	 */
-	/*public static Activity postActivity(Activity activity, int idPerson, ActivityType activityType) {
+	public static Activity postActivity(Activity activity, int idPerson) {
 		activity.setIdPerson(idPerson);
 		activity.setPerson(Person.getPersonById(idPerson));
-		activity.setIdActivityType(activityType.getIdActivityType());
-		activity.setActivityType(activityType);
+		activity.setActivityType(ActivityType.getActivityTypeByActivityTypeId(activity.getIdActivityType()));
 
 		EntityManager em = ActivityPreferenceDao.instance.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
@@ -291,7 +290,7 @@ public class Activity implements Serializable {
 		tx.commit();
 		ActivityPreferenceDao.instance.closeConnections(em);
 		return activity;
-	}*/
+	}
 
 	/**
 	 * Update Activity
@@ -304,7 +303,7 @@ public class Activity implements Serializable {
 		EntityManager em = ActivityPreferenceDao.instance.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		em.merge(activity);
+		activity = em.merge(activity);
 		tx.commit();
 		ActivityPreferenceDao.instance.closeConnections(em);
 		return activity;

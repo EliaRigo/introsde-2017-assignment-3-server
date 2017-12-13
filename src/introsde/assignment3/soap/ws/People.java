@@ -21,7 +21,7 @@ public interface People {
     @WebMethod(operationName="readPersonList")
     @WebResult(name="people") 
     public List<Person> readPersonList();
-    /*
+
     //Method #2
     @WebMethod(operationName="readPerson")
     @WebResult(name="person") 
@@ -30,12 +30,12 @@ public interface People {
     //Method #3
     @WebMethod(operationName="updatePerson")
     @WebResult(name="person") 
-    public Person updatePerson(@WebParam(name="person", targetNamespace = "http://ws.document.introsde/") Person person);
+    public Person updatePerson(@WebParam(name="person") Person person);
  
     //Method #4
     @WebMethod(operationName="createPerson")
     @WebResult(name="person") 
-    public Person createPerson(@WebParam(name="person", targetNamespace = "http://ws.document.introsde/") Person person);
+    public Person createPerson(@WebParam(name="person") Person person);
     
     //Method #5
     @WebMethod(operationName="deletePerson")
@@ -47,6 +47,7 @@ public interface People {
     @WebResult(name="activity") 
     public List<Activity> readPersonPreferences(@WebParam(name="personId") Long id, 
     									   		@WebParam(name="activityType") String activity_type);
+
     //Method #7
     @WebMethod(operationName="readPreferences")
     @WebResult(name="activity") 
@@ -81,5 +82,4 @@ public interface People {
     @WebMethod(operationName="getBestPersonPreference")
     @WebResult(name="activity") 
     public List<Activity> getBestPersonPreference(@WebParam(name="personId") Long id);
-    */
 }

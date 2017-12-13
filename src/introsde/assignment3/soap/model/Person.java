@@ -88,6 +88,7 @@ public class Person implements Serializable {
 		this.lastname = lastname;
 	}
 
+	@XmlElementWrapper(name = "Activities")
 	public List<Activity> getActivities() {
 		return activities;
 	}
@@ -125,7 +126,7 @@ public class Person implements Serializable {
 	 * @param p New Person
 	 * @return Single Person just inserted
 	 */
-	/*
+	
 	public static Person newPerson(Person p) {
 		EntityManager em = ActivityPreferenceDao.instance.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
@@ -136,10 +137,11 @@ public class Person implements Serializable {
 		for (Activity a : p.getActivities()) {
 			a.setPerson(p);
 			a.setIdPerson(p.getIdPerson());
+			a.setActivityType(ActivityType.getActivityTypeByActivityTypeId(a.getIdActivityType()));
 			Activity.updateActivity(a);
 		}
 		return p;
-	}*/
+	}
 
 	/**
 	 * Update Person
