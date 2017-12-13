@@ -17,6 +17,11 @@ import introsde.assignment3.soap.model.Person;
 @SOAPBinding(style = Style.DOCUMENT, use=Use.LITERAL) //optional
 public interface People {
 	
+	//Method #0
+	@WebMethod(operationName="init")
+    @WebResult(name="void") 
+    public void init();
+	
 	//Method #1
     @WebMethod(operationName="readPersonList")
     @WebResult(name="people") 
