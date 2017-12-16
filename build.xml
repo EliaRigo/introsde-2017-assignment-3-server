@@ -127,8 +127,8 @@
         </copy>
     </target>
 	<target name="start" depends="install">
-		<echo message="app start introsde.rest.activitypreference.App in ${build.dir}" />
-	    <java classname="introsde.rest.activitypreference.App" classpath="${build.dir}" fork="true">
+		<echo message="Server start introsde.assignment3.soap.endpoint.PeoplePublisher in ${build.dir}" />
+	    <java classname="introsde.assignment3.soap.endpoint.PeoplePublisher" classpath="${build.dir}" fork="true">
 	    	<arg value="$JAVA_OPTS  -cp" />
 	        <classpath>
 	        	<path location="build" />
