@@ -150,7 +150,7 @@
 		</war>
 	</target>
 	
-	<property name="apache.dir" value="/opt/Tomcat/"></property>
+	<property name="apache.deplay.war" value="/opt/Tomcat/"></property>
 	<target name="apache.deploy.war" depends="create.war">
 		<copy file="${web.dir}/introsde-2017-assignment-3-server.war"
 		      toDir="${apache.dir}/webapps"
