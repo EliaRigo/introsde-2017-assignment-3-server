@@ -13,7 +13,7 @@ public class PeoplePublisher {
     public static void main(String[] args) throws IllegalArgumentException, IOException, URISyntaxException{
         String PROTOCOL = "http://";
         String HOSTNAME = InetAddress.getLocalHost().getHostAddress();
-        if (HOSTNAME.equals("127.0.0.1"))
+        if (HOSTNAME.equals("127.0.1.1"))
         {
             HOSTNAME = "localhost";
         }
